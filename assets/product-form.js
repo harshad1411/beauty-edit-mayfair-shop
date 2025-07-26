@@ -131,3 +131,54 @@ if (!customElements.get('product-form')) {
     }
   );
 }
+
+
+function isElementFullyInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= window.innerHeight &&
+    rect.right <= window.innerWidth
+  );
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const element = document.querySelector(".product .product-form form");
+  const elementParent = document.querySelector(".product .product-form");
+
+  if (!element || !elementParent) return;
+
+  let ticking = false;
+
+  const toggleFixedClass = () => {
+    const inView = isElementFullyInViewport(elementParent);
+
+    if (!inView) {
+      if (!elementParent.classList.contains("fixed")) {
+        elementParent.classList.add("fixed");
+        document.body.classList.add("product-add-to-cart-btn-fixed");
+      }
+    } else {
+      if (elementParent.classList.contains("fixed")) {
+        elementParent.classList.remove("fixed");
+        document.body.classList.remove("product-add-to-cart-btn-fixed");
+      }
+    }
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        toggleFixedClass();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  toggleFixedClass(); // Initial check
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", toggleFixedClass);
+});

@@ -43,6 +43,7 @@ document.addEventListener('shopify:section:unload', (event) => {
   });
 });
 
+
 document.addEventListener('shopify:section:reorder', () => hideProductModal());
 
 document.addEventListener('shopify:section:select', () => hideProductModal());

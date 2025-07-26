@@ -594,3 +594,28 @@
     clip-path: polygon(var(--shape--blob-5));
   }
 }
+.card-wrapper .card{
+  transition: .3s all;
+}
+.card-wrapper .card .quick-add{
+  display: none;
+  transition: .3s all;
+  position: absolute;
+  bottom: 15px;
+  padding: 15px;
+  width: 100%;
+  bottom: 25px;
+  height: 44px;
+  font-size: 16px;
+  line-height: 1;
+  border-color: inherit;
+  min-height: auto;
+  letter-spacing: 0;
+}
+.card-wrapper .card .quick-add .quick-add__submit::after, .card-wrapper .card .quick-add .quick-add__submit::before{
+  display: none;
+
+}
+.card-wrapper .card:hover .quick-add{
+  display: block;
+}
