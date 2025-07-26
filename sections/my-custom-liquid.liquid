@@ -1,0 +1,154 @@
+{%- style -%}
+.section-{{ section.id }}-padding {
+  padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+  padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+}
+
+section.my-custom-liquid.background {
+  display: none;
+  position: absolute;
+  background-image: linear-gradient(133deg, transparent 0%, #fff 55%, rgba(251, 238, 236, 0.5) 55%);
+  z-index: -1;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+
+@media screen and (min-width: 890px) {
+  section.my-custom-liquid.background {
+    background-image: linear-gradient(142deg, transparent 0%, #fff 55%, rgba(251, 238, 236, 0.5) 55%);
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  section.my-custom-liquid.background {
+    background-image: linear-gradient(146deg, transparent 0%, #fff 55%, rgba(251, 238, 236, 0.5) 55%);
+  }
+}
+{%- endstyle -%}
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding">
+    {{ section.settings.custom_liquid }}
+  </div>
+</div>
+
+{% javascript %}
+  window.addEventListener('DOMContentLoaded', function(evt) {
+    
+    function set_vars() {
+      var tri_height = 0, tri_width = 0, tri_left = 0, tri_top = 0;
+      var idx = 0;
+      var tri_bg = document.querySelector('section.my-custom-liquid.background');
+      var iwt_padding = 36; /* Image with Text top & bottom padding */
+
+      document.querySelectorAll('div[id^="shopify-section-template"].section .image-with-text__grid').forEach(function(el) {
+        tri_width = el.offsetWidth;
+        tri_left = el.offsetLeft;
+      });
+
+      if (window.innerWidth >= 750) {
+
+        document.querySelectorAll('div[id^="shopify-section-template"].section .image-with-text').forEach(function(el) {
+          if (idx === 0) {
+            tri_left += el.offsetLeft;
+            tri_top = el.offsetTop;
+            idx++;
+          }
+          tri_height += el.offsetHeight + iwt_padding;
+        });
+
+        tri_bg.style.width = tri_width + 'px';
+        tri_bg.style.height = tri_height + 'px';
+        tri_bg.style.top = tri_top + 'px';
+        tri_bg.style.left = tri_left + 'px';
+        tri_bg.style.display = 'block';
+
+      } else {
+
+        tri_bg.style.display = '';
+
+      }
+    }
+
+    /* Debounce for resize */
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        }
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      }
+    }
+
+    // Make the affected section backgrounds transparent
+    document.querySelectorAll('div[id^="shopify-section-template"].section .image-with-text__content').forEach(function(el) {
+      el.style.backgroundColor='transparent';
+    });
+
+    // Initialise the background section
+    set_vars();
+
+    window.addEventListener('resize', debounce(set_vars, 250));
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "My Custom Liquid",
+  "tag": "section",
+  "class": "section my-custom-liquid background",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "t:sections.custom-liquid.settings.custom_liquid.label",
+      "info": "t:sections.custom-liquid.settings.custom_liquid.info"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "My Custom Liquid"
+    }
+  ]
+}
+{% endschema %}

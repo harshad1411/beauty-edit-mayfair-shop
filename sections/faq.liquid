@@ -1,0 +1,208 @@
+{% comment %} <link rel="stylesheet" href="{{ 'faq-style.css' | asset_url }}" media="print" onload="this.media='all'"> {% endcomment %}
+
+{%- style -%}
+.accordion-item{
+  font-size: 18px;
+}
+
+.accordion .accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion .accordion-item button[aria-expanded='true'] {
+  border-bottom: 1px solid #000;
+}
+
+.accordion button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  color: #000;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.accordion button:hover::after,
+.accordion button:focus::after {
+  border: 1px solid #000;
+}
+
+.accordion button .accordion-title {
+  padding: 1em 1.5em 1em 0;
+  font-size:18px
+}
+
+.accordion button .icon {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #000;
+  border-radius: 22px;
+}
+
+.accordion button .icon::after,
+.accordion button .icon::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+}
+
+.accordion button .icon::after {
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+}
+
+.accordion button[aria-expanded='true'] {
+  color: #000;
+}
+
+.accordion button[aria-expanded='true'] .icon::after {
+  width: 0;
+}
+
+.accordion .accordion-content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+}
+
+.accordion button[aria-expanded='true'] + .accordion-content {
+  opacity: 1;
+  max-height: 28em;
+  transition: all 200ms linear;
+  will-change: opacity, max-height;
+}
+
+.accordion .accordion-content p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 2em 0;
+}
+{%- endstyle -%}
+
+<div class="page-width page-width--narrow">
+  <h1 class="main-page-title page-title h1 center">
+    {{ page.title | escape }}
+  </h1>
+
+  <div class="rte">
+    {{ page.content }}
+  </div>
+ 
+  <div class="accordion">
+    {% for block in section.blocks %}
+      {% assign item = block.settings %}
+
+      {% case block.type %}
+        {% when 'faqtitle' %}
+
+          <h2>{{ item.faqtitle }}</h2>
+
+        {% when 'faq' %}
+
+          <div class="accordion-item">
+            <button id="accordion-button-{{ forloop.index }}" aria-expanded="false">
+              <span class="accordion-title">{{ item.question }}</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+              <p>
+              {{ item.answer }}
+              </p>
+            </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (evt) => {
+    const items = document.querySelectorAll('.accordion button');
+
+    function toggleAccordion() {
+      const itemToggle = this.getAttribute('aria-expanded');
+
+      for (i = 0; i < items.length; i++) {
+        items[i].setAttribute('aria-expanded', 'false');
+      }
+
+      if (itemToggle == 'false') {
+        this.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    items.forEach((item) => item.addEventListener('click', toggleAccordion));
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "spaced-section",
+  "blocks": [
+    {
+      "name":"Faq Title",
+      "type":"faqtitle",
+      "settings":[
+        {
+          "type":"text",
+          "label":"Faq Header",
+          "id":"faqtitle"
+        }
+      ]
+    },
+    {
+      "name": "FAQ Item",
+      "type": "faq",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do you have a question?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>I have an answer</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 100,
+  "presets": [
+    {
+      "name": "FAQ Block",
+      "blocks": [
+        {
+          "type": "faqtitle"
+        },
+        {
+          "type": "faq"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

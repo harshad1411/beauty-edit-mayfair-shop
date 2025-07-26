@@ -1,0 +1,22 @@
+<div style="text-align:center;margin-top:1em">
+  {{ section.settings.image | image_url: width: 500 | image_tag: srcset: nil, alt: nil, width: 500, height: 500 }}
+</div>
+
+{% schema %}
+  {
+    "name": "Story Image",
+    "settings": [
+      {
+        "label": "Story Image",
+        "id": "image",
+        "type": "image_picker"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
