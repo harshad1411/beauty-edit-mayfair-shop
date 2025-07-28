@@ -97,6 +97,18 @@
                   {{- block.settings.text -}}
                 </p>
               {%- when 'title' -%}
+                <p
+                  class="product-vendor product__text inline-richtext caption-with-letter-spacing"
+                  {{ block.shopify_attributes }}
+                >
+                  {% assign vendor = product.vendor | handle %}
+                  {% assign vendor_collection = collections[vendor] %}
+                  {% if  vendor_collection %}
+                    <a href="{{ vendor_collection.url }}">{{ vendor_collection.title }}</a>
+                  {% else %}
+                    {{- block.settings.text -}}
+                  {% endif  %}
+                </p>
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">

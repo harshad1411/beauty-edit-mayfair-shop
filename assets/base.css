@@ -3620,4 +3620,12 @@ details-disclosure > details {
 .slideshow__controls.slideshow__controls--top {
     display: none;
   }
- 
+  .xs-hide{
+    display: none;
+  }
+}
+@media (min-width: 768px){
+  .xs-show{
+    display: none;
+  }
+}

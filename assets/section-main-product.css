@@ -1562,9 +1562,15 @@ a.product__text {
   background: #fff;
   z-index: 10000;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 4px 4px 10px 2px;
-  padding: 10px; 
+  padding: 10px 24px; 
+}
+@media(max-width: 767px){
+  .product-form.fixed form{
+    padding: 10px;
+  }
 }
 .product-form__buttons{
   display: flex;
@@ -1625,5 +1631,15 @@ shop-pay-wallet-button{
   
 }
 .product-add-to-cart-btn-fixed .needsclick{
-  z-index: 10 !important;
+  z-index: 0 !important;
+}
+.product .badge.price__badge-sale{
+  position: static;
+}
+.product-form__title-sticky{
+  margin: 0;
+}
+.product-vendor, .product-vendor a{
+  font-size: 16px;
+  text-decoration: none;
 }

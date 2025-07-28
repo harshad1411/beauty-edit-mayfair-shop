@@ -50,8 +50,8 @@
 
 .card--card:after,
 .card--standard .card__inner:after {
-  content: '';
-  position: absolute;
+  /* content: ''; */
+  /* position: absolute; */
   z-index: -1;
   width: calc(var(--border-width) * 2 + 100%);
   height: calc(var(--border-width) * 2 + 100%);
@@ -119,6 +119,7 @@
 
 .card--media .card__inner .card__content {
   position: relative;
+  display: none;
   padding: calc(var(--image-padding) + 1rem);
 }
 
@@ -349,9 +350,9 @@
 
 .card__heading a::after {
   bottom: 0;
-  content: '';
+  /* content: ''; */
   left: 0;
-  position: absolute;
+  /* position: absolute; */
   right: 0;
   top: 0;
   z-index: 1;
@@ -619,3 +620,54 @@
 .card-wrapper .card:hover .quick-add{
   display: block;
 }
+
+.quick-add__submit{
+  height: 46px;
+  font-size: 16px;
+  min-height: auto;
+}
+.quick-add_submit .icon-wrap{
+  display: none !important;
+}
+
+@media(max-width: 767px){
+  .xs-hide{
+    display: none !important;
+  }
+  .card-wrapper .card .quick-add{
+    display: block;
+    transform: translate(0, 0);
+  }
+  .card-wrapper .card .quick-add{
+    display: block;
+    transform: translate(0, 0);
+    margin: 0;
+    height: auto;
+    padding: 0;
+    left: auto;
+    right: 0;
+    width: auto;
+  }
+  .card-wrapper .card .quick-add .quick-add__submit{
+    width: auto;
+    min-width: auto; 
+    min-width: auto;
+    padding: 0 !important;
+    min-height: auto;
+    line-height: normal;
+    height: auto;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+  }
+}
+@media(min-width: 768px){
+  .xs-show{
+    display: none !important;
+  }
+}
+
+.card-wrapper .card .quick-add .icon-wrap{
+  display: none;
+}
+ 
