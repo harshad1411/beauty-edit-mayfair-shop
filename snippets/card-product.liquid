@@ -59,6 +59,7 @@
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if card_product.featured_media -%}
+          <a href="{{card_product.url }}" style="display:block; width:100%;">
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
             <div class="media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
@@ -217,6 +218,7 @@
               </div>
             {%- endif -%}
           </div>
+        </a>
         {%- endif -%}
         <div class="card__content">
           <div class="card__information">

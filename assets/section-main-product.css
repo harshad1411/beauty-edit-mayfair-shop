@@ -1543,6 +1543,8 @@ a.product__text {
   position: static;
   max-width: 80px;
   margin: 0 auto;
+  width: 80px;
+  object-fit: contain;
 }
 .product-multicolumn.multicolumn .multicolumn-card .multicolumn-card__info h3{
   text-align: center;
@@ -1627,6 +1629,8 @@ shop-pay-wallet-button{
 @media (max-width: 767px) {
   .product-multicolumn.multicolumn .multicolumn-card .multicolumn-card__image-wrapper .media img{
     max-width: 60px;
+    object-fit: contain;
+    width: 60px;
   }
   
 }
@@ -1638,7 +1642,12 @@ shop-pay-wallet-button{
 }
 .product-form__title-sticky{
   margin: 0;
+  display: none;
 }
+.product-form.fixed form .product-form__title-sticky{
+  display: block;
+}
+
 .product-vendor, .product-vendor a{
   font-size: 16px;
   text-decoration: none;
