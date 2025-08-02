@@ -625,6 +625,8 @@
   height: 46px;
   font-size: 16px;
   min-height: auto;
+  background: #000 !important;
+  color: #fff !important;
 }
 .quick-add_submit .icon-wrap{
   display: none !important;

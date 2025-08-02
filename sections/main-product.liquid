@@ -206,8 +206,8 @@
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
-                    <details id="Details-{{ block.id }}-{{ section.id }}">
-                      <summary>
+                    <details id="Details-{{ block.id }}-{{ section.id }}" open>
+                      <summary aria-expanded="true">
                         <div class="summary__title">
                           <h2 class="h4 accordion__title inline-richtext">
                             Description

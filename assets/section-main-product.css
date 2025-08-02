@@ -1497,15 +1497,21 @@ a.product__text {
   padding: 0 ;
 }
 .product  .product__accordion .accordion__title { 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   color: #000;
 }
 .product  .product__accordion summary .icon-caret{
-  width: 16px;
-    height: 16px;
+  width: 18px;
+    height: 18px;
     top: 50%;
     transform: translateY(-50%);
+}
+.product  .product__accordion p{
+  font-size: 18px;
+}
+.product .accordion__content *, .product .accordion__content p{
+  font-size: 18px;
 }
 .product .product__accordion summary[aria-expanded="true"] .icon-caret{
     width: 16px;
@@ -1515,7 +1521,7 @@ a.product__text {
 }
 
 .product .accordion__content *, .product .accordion__content p{ 
-  font-size: 14px;
+  font-size: 16px;
 }
 .product .accordion__content {
   padding: 0;
@@ -1541,9 +1547,9 @@ a.product__text {
 }
 .product-multicolumn.multicolumn .multicolumn-card .multicolumn-card__image-wrapper .media img{
   position: static;
-  max-width: 80px;
+  max-width: 60px;
   margin: 0 auto;
-  width: 80px;
+  width: 60px;
   object-fit: contain;
 }
 .product-multicolumn.multicolumn .multicolumn-card .multicolumn-card__info h3{
@@ -1651,4 +1657,17 @@ shop-pay-wallet-button{
 .product-vendor, .product-vendor a{
   font-size: 16px;
   text-decoration: none;
+}
+
+.product-form__buttons .shopify-payment-button shopify-accelerated-checkout shop-pay-wallet-button{
+  display: none !important;
+}
+.product-form__buttons .shopify-payment-button shopify-accelerated-checkout *{
+  display: none !important;
+}
+.product-form__buttons .shopify-payment-button shopify-accelerated-checkout more-payment-options-link, .product-form__buttons .shopify-payment-button shopify-accelerated-checkout more-payment-options-link .shopify-payment-button__more-options {
+  display: block !important;
+}
+.product__accordion {
+
 }
