@@ -103,10 +103,10 @@
                 >
                   {% assign vendor = product.vendor | handle %}
                   {% assign vendor_collection = collections[vendor] %}
-                  {% if  vendor_collection %}
+                  {% if  vendor_collection != blank %}
                     <a href="{{ vendor_collection.url }}">{{ vendor_collection.title }}</a>
                   {% else %}
-                    {{- block.settings.text -}}
+                    {{- product.vendor -}}
                   {% endif  %}
                 </p>
                 <div class="product__title" {{ block.shopify_attributes }}>

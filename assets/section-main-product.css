@@ -1547,9 +1547,9 @@ a.product__text {
 }
 .product-multicolumn.multicolumn .multicolumn-card .multicolumn-card__image-wrapper .media img{
   position: static;
-  max-width: 60px;
+  max-width: 30px;
   margin: 0 auto;
-  width: 60px;
+  width: 30px;
   object-fit: contain;
 }
 .product-multicolumn.multicolumn .multicolumn-card .multicolumn-card__info h3{
@@ -1643,9 +1643,7 @@ shop-pay-wallet-button{
 .product-add-to-cart-btn-fixed .needsclick{
   z-index: 0 !important;
 }
-.product .badge.price__badge-sale{
-  position: static;
-}
+
 .product-form__title-sticky{
   margin: 0;
   display: none;
@@ -1670,4 +1668,7 @@ shop-pay-wallet-button{
 }
 .product__accordion {
 
+}
+.product  .badge, .product .badge.price__badge-sale{
+  position: static !important;
 }
