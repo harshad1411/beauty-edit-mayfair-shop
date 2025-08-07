@@ -235,6 +235,17 @@
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
+                {% assign show = false %}
+                {% if block.settings.content != blank %}
+                  {% assign show = true %}
+                {% endif %}
+                {% if block.settings.page != blank %}
+                {% if block.settings.page.content != blank %}
+                  {% assign show = true %}
+                {% endif %}
+              {% endif %}
+
+                {% if show == true %}
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
                     <summary>
@@ -250,6 +261,7 @@
                       {{ block.settings.content }}
                       {{ block.settings.page.content }}
                     </div>
+                  {% endif  %}
                   </details>
                 </div>
               {%- when 'quantity_selector' -%}
